@@ -20,10 +20,11 @@ while(True):
         continue
     else:
         inventory += int(user_input)
+        if(inventory >= 500):
+                inventory = 500
+                print("Overstock Alert!!!")
+                break
         print("Inventory stock is now:",inventory)
-    if(inventory >= 500):
-        inventory = 500
-        print("Overstock Alert!!!")
-        break
+    
 print("Total Units Processed:", inventory)
 print("Number of Failed/Rejected Entries:", failed_entries)
