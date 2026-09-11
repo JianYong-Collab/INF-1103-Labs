@@ -7,11 +7,16 @@ while(True):
     user_input = input("Enter the new stock changes: ")
     if(user_input == "quit"):
         break
-    if(not user_input.isdigit()):
+    try:
+        user_input = int(user_input)
+    except ValueError:
         failed_entries += 1
+        print("Please enter proper input")
         continue
-    elif (int(user_input) < 0):
+    #Check if Negative Number
+    if (int(user_input) < 0):
         failed_entries += 1
+        print("Negative number are not accepted")
         continue
     else:
         inventory += int(user_input)
