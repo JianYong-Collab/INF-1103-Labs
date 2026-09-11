@@ -14,15 +14,16 @@ while(True):
         print("Please enter proper input")
         continue
     #Check if Negative Number
-    if (int(user_input) < 0):
+    if ( user_input < 0):
         failed_entries += 1
         print("Negative number are not accepted")
         continue
     else:
-        inventory += int(user_input)
+        inventory += user_input
         if(inventory >= 500):
                 inventory = 500
                 print("Overstock Alert!!!")
+                print("Inventory stock is now:",inventory)
                 break
         print("Inventory stock is now:",inventory)
     
