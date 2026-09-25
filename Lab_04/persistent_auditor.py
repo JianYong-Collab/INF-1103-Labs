@@ -1,5 +1,9 @@
 
-#Get Valid Input
+"""!
+@brief This function handles user input based on input_type and returns output
+@param input_type - type of the input, ie. "product", "quantity"
+@return valid user input or "quit"
+"""
 def get_valid_input(input_type):
     while True:
         if input_type == "product":
@@ -7,7 +11,7 @@ def get_valid_input(input_type):
         elif input_type == "quantity":
             user_input = input("Enter Quantity: ")
 
-        if user_input == "quit":
+        if user_input.lower() == "quit":
             return "quit"
 
         if input_type == "product":
@@ -25,21 +29,16 @@ def get_valid_input(input_type):
             if user_input < 0:
                 print("Please enter valid input")
                 continue
-
             return user_input
-
-def process_delivery(current_total, new_value):
-     return current_total + new_value
-
-def calculate_tax(amount):
-     return 0.10 * amount
-
-def generate_report(total_units, failed_attempts):
-     print("\n--- Final Report ---")
-     print("Total Deliveries Processed:",total_units)
-     print("Number of Failed/Rejected Entries:",failed_attempts)
-
+"""!
+@brief This function reads and write a text file ("inventory.txt")
+@details This function handles error checking for files and reads the data into
+            transaction_history and total_orders
+@param None
+@return transactions_history and total_orders
+"""
 def load_inventory():
+
     try:
         with open("inventory.txt","r") as file:
             lines = file.read().splitlines()
@@ -57,7 +56,17 @@ def load_inventory():
             transaction_history = []
             total_inventory = 0
             return transaction_history, total_inventory
+
+        
+"""!
+@brief This function takes in two inputs and writes their contents into
+       inventory.txt file
+@param transaction_history - Str of transactions appended with "\n"
+@param total_inventory - int number of total inventory appended with "\n"
+@return None
+"""           
 def save_inventory(transaction_history, total_inventory):
+
     with open("inventory.txt","w") as file:
         file.write(transaction_history+total_inventory)
     print("Order successfully saved to orders.txt")
@@ -97,7 +106,3 @@ while(True):
     
     transaction_history.append(new_order)
     transactions_sorted.append(new_order.split(', '))
-    
-
-    
-      
