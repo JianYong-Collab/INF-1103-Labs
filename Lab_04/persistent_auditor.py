@@ -98,7 +98,7 @@ while(True):
     print("New Order Added:")
     total_inventory += quantity_input
     if(len(transactions_sorted) <= 0):
-        order_no = 1000
+        order_no = 1001
     else:
         order_no = int(transactions_sorted[-1][0]) + 1
     new_order = str(order_no)+", "+product_input+", "+str(quantity_input)
