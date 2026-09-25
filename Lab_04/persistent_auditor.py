@@ -93,10 +93,11 @@ while(True):
     else:
         order_no = int(transactions_sorted[-1][0]) + 1
     new_order = str(order_no)+", "+product_input+", "+str(quantity_input)
-
+    print(new_order)
+    
     transaction_history.append(new_order)
     transactions_sorted.append(new_order.split(', '))
-    print(transactions_sorted)
+    
 
     
       
