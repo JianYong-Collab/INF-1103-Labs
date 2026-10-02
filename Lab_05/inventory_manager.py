@@ -45,7 +45,7 @@ def display_all():
                 product_display += f"{key}: {product[key]}"
             else:
                 if(key == "Price"):
-                    product_display += f"{key}: ${product[key]} | "
+                    product_display += f"{key}: ${product[key]:.2f} | "
                 else:
                     product_display += f"{key}: {product[key]} | "
         print(product_display)
