@@ -1,3 +1,4 @@
+import copy
 inventory_container = []
 def add_product(productID, productName, productPrice, productStock):
     inventory_container.append(
@@ -9,16 +10,17 @@ def add_product(productID, productName, productPrice, productStock):
         }
     )   
 
-def update_stock(productID):
-    inventory_container[productID]
-    pass
+def update_stock(productID, newValue):
+    for product in inventory_container:
+        for value in product.values():
+            if(value == productID):
+                product["Stock"] = newValue
+                return
 
 def search_product(productKey, productID):
     for product in inventory_container:
         for (key, value) in product.items():
             if(key == productKey and value == productID):
-                print("Found Product")
-                print(product)
                 return product
     return None
     
@@ -32,11 +34,17 @@ def display_all():
             if(index == len(product.keys())-1):
                 product_display += f"{key}: {product[key]}"
             else:
-                product_display += f"{key}: {product[key]} | "
+                if(key == "Price"):
+                    product_display += f"{key}: ${product[key]} | "
+                else:
+                    product_display += f"{key}: {product[key]} | "
         print(product_display)
 
     print("------------------------------------------------")
 
+def get_inventory():
+    return inventory_container
 
-def load_inventory():
-    pass
+def load_inventory(file_data):
+    global inventory_container
+    inventory_container = copy.deepcopy(file_data)

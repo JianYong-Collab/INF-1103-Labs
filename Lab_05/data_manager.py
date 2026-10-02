@@ -1,4 +1,6 @@
 import os
+import json
+import inventory_manager
 
 """
 @brief - Load Json file and return dictionary / Create new json file
@@ -7,17 +9,16 @@ def load_file(fileName):
     os.chdir("Lab_05")
     cwd = os.getcwd()
 
-    ## Create Empty Dictionary
-
     try:
-        with open(f"{cwd}/{fileName}","r") as inventory:
-            print(f"Found!!")
+        with open(f"{cwd}/{fileName}","r") as file:
+            inventory_manager.load_inventory(json.load(file))
     except FileNotFoundError:
-        with open(f"{cwd}/{fileName}","w") as inventory:
-            print(f"Created!!")
+        with open(f"{cwd}/{fileName}","w") as file:
+            inventory_manager.load_inventory([])
 
-    pass
+def save_inventory(inventory, fileName):
+    #open the file and overwrite
+    cwd = os.getcwd()
 
-
-def save_inventory():
-    pass
+    with open(f"{cwd}/{fileName}","w") as file:
+            json.dump(inventory,file)

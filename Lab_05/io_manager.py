@@ -1,4 +1,5 @@
 import inventory_manager
+import data_manager
 
 def has_numbers(string_to_check):
     return any(char.isdigit() for char in string_to_check)
@@ -53,7 +54,8 @@ def process_input(option):
         case("3"):
             print("Update Stock")
             productID_input = get_valid_input("Product ID: ","string")
-            product = inventory_manager.search_product("ID","P001")
+            print("\n")
+            product = inventory_manager.search_product("ID",productID_input)
             if(product == None):
                 print("Product is not found!!")
             else:
@@ -63,16 +65,37 @@ def process_input(option):
                 print(f"Price: {product["Price"]}")
                 print(f"Stock: {product["Stock"]}")
                 print("------------------------------------------------")
+                print("\n")
+                new_stock_input = get_valid_input("New Stock Quantity: ", "integer")
+                inventory_manager.update_stock(product["ID"], new_stock_input)
+                print("\n")
+                print("Stock Updated Successfully!")
             
         case("4"):
-            pass
-        #Search Product
+            print("Search Product")
+            productID_input = get_valid_input("Enter Product ID: ","string")
+            print("\n")
+            product = inventory_manager.search_product("ID",productID_input)
+            if(product == None):
+                print("Product is not found!!")
+            else:
+                print("Product Found:")
+                print("------------------------------------------------")
+                print(f"ID: {product["ID"]}")
+                print(f"Price: {product["Price"]}")
+                print(f"Stock: {product["Stock"]}")
+                print("------------------------------------------------")
+                print("\n")
+
         case("5"):
             #Save Inventory
-            pass
+            print("Saving Inventory......")
+            data_manager.save_inventory(inventory_manager.get_inventory(), "inventory.json")
+            print("Inventory saved successfully to inventory.json")
         case("6"):
             #Save Inventory
-            pass
+
+
 
 # Handle all cases of valid input
 # Strings && Integers only
