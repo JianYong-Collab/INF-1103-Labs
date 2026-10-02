@@ -1,6 +1,11 @@
 import copy
 inventory_container = []
 def add_product(productID, productName, productPrice, productStock):
+    #Avoid duplicate ID
+    for product in inventory_container:
+        for value in product.values():
+            if(value == productID):
+                return False
     inventory_container.append(
         {
         "ID"    :productID,
@@ -8,7 +13,8 @@ def add_product(productID, productName, productPrice, productStock):
         "Price" :productPrice,
         "Stock" :productStock
         }
-    )   
+    )
+    return True   
 
 def update_stock(productID, newValue):
     for product in inventory_container:
@@ -26,6 +32,10 @@ def search_product(productKey, productID):
     
 
 def display_all():
+    if(len(inventory_container) == 0):
+        print("No Stock")
+        return
+
     print("Current Inventory")
     print("------------------------------------------------")
     for product in inventory_container:

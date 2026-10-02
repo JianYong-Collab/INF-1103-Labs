@@ -1,8 +1,12 @@
 import inventory_manager
 import data_manager
 
-def has_numbers(string_to_check):
-    return any(char.isdigit() for char in string_to_check)
+#Note This cannot check for negative numbers
+def is_number(string_to_check):
+    try:
+        return float(string_to_check)
+    except (ValueError, TypeError):
+        return 0
 
 
 def display_menu():
@@ -43,14 +47,16 @@ def process_input(option):
             print("Add new product")
             productID_input = get_valid_input("Product ID: ","string")
             productName_input = get_valid_input("Name: ","string")
-            productPrice_input = int(get_valid_input("Price: ","integer"))
+            productPrice_input = float(get_valid_input("Price: ","integer"))
             productStock_input = int(get_valid_input("Stock Quantity: ","integer"))
-            inventory_manager.add_product(productID_input,
+            add_status = inventory_manager.add_product(productID_input,
                                             productName_input,
                                             productPrice_input,
                                             productStock_input)
-            print("Product added successfully!")
-            pass
+            if(add_status == False):
+                print("Cannot add two different products with same product Ids!!")
+            else: 
+                print("Product added successfully!")
         case("3"):
             print("Update Stock")
             productID_input = get_valid_input("Product ID: ","string")
@@ -94,7 +100,10 @@ def process_input(option):
             print("Inventory saved successfully to inventory.json")
         case("6"):
             #Save Inventory
-
+            print("\n")
+            print("Saving Inventory before exit.....")
+            data_manager.save_inventory(inventory_manager.get_inventory(), "inventory.json")
+            print("Inventory saved successfully.")
 
 
 # Handle all cases of valid input
@@ -107,7 +116,7 @@ def get_valid_input(input_prompt,input_type):
         if(input_type == "string" and user_input.isdigit() == True):
             continue
 
-        if(input_type == "integer" and user_input.isdigit() == False):
+        if(input_type == "integer" and is_number(user_input) == False):
             continue
 
         return user_input

@@ -11,6 +11,9 @@ def load_file(fileName):
 
     try:
         with open(f"{cwd}/{fileName}","r") as file:
+            if(file == ""):
+                 return
+            file.seek(0)
             inventory_manager.load_inventory(json.load(file))
     except FileNotFoundError:
         with open(f"{cwd}/{fileName}","w") as file:
