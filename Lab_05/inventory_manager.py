@@ -36,7 +36,7 @@ def display_all():
         print("No Stock")
         return
 
-    print("Current Inventory")
+    print("\nCurrent Inventory")
     print("------------------------------------------------")
     for product in inventory_container:
         product_display = ""

@@ -1,5 +1,6 @@
 import inventory_manager
 import data_manager
+INVENTORY_FILE = "inventory.json"
 
 #Note This cannot check for negative numbers
 def is_number(string_to_check):
@@ -12,14 +13,12 @@ def is_number(string_to_check):
 def display_menu():
     print("========================================")
     print("INVENTORY MANAGEMENT SYSTEM")
-    print("========================================")
+    print("========================================\n")
 
-    ## inventory found
-    ## inventory loaded
+    data_manager.load_file(INVENTORY_FILE)
     user_input = ""
-
     while (True):
-        print("----------- MENU -----------")
+        print("\n----------- MENU -----------")
         print("1. Display All Products")
         print("2. Add Product")
         print("3. Update Stock")
@@ -28,7 +27,7 @@ def display_menu():
         print("6. Exit")
         print("----------------------------")
 
-        user_input = input("Enter Option: ")
+        user_input = input("\nEnter Option: ")
         if(user_input.isdigit() == False or len(user_input) > 1 ):
             print("Please enter valid input")
         # process input
@@ -44,7 +43,7 @@ def process_input(option):
         case("1"):
            inventory_manager.display_all()
         case("2"):
-            print("Add new product")
+            print("\nAdd new product")
             productID_input = get_valid_input("Product ID: ","string")
             productName_input = get_valid_input("Name: ","string")
             productPrice_input = float(get_valid_input("Price: ","integer"))
@@ -58,7 +57,7 @@ def process_input(option):
             else: 
                 print("Product added successfully!")
         case("3"):
-            print("Update Stock")
+            print("\nUpdate Stock")
             productID_input = get_valid_input("Product ID: ","string")
             print("\n")
             product = inventory_manager.search_product("ID",productID_input)
@@ -67,18 +66,18 @@ def process_input(option):
             else:
                 print("Product Found:")
                 print("------------------------------------------------")
-                print(f"ID: {product["ID"]}")
-                print(f"Price: {product["Price"]}")
-                print(f"Stock: {product["Stock"]}")
+                print(f"ID: {product['ID']}")
+                print(f"Price: {product['Price']}")
+                print(f"Stock: {product['Stock']}")
                 print("------------------------------------------------")
                 print("\n")
                 new_stock_input = get_valid_input("New Stock Quantity: ", "integer")
-                inventory_manager.update_stock(product["ID"], new_stock_input)
+                inventory_manager.update_stock(product['ID'], new_stock_input)
                 print("\n")
                 print("Stock Updated Successfully!")
             
         case("4"):
-            print("Search Product")
+            print("\nSearch Product")
             productID_input = get_valid_input("Enter Product ID: ","string")
             print("\n")
             product = inventory_manager.search_product("ID",productID_input)
@@ -87,22 +86,21 @@ def process_input(option):
             else:
                 print("Product Found:")
                 print("------------------------------------------------")
-                print(f"ID: {product["ID"]}")
-                print(f"Price: {product["Price"]}")
-                print(f"Stock: {product["Stock"]}")
+                print(f"ID: {product['ID']}")
+                print(f"Price: {product['Price']}")
+                print(f"Stock: {product['Stock']}")
                 print("------------------------------------------------")
                 print("\n")
 
         case("5"):
             #Save Inventory
-            print("Saving Inventory......")
-            data_manager.save_inventory(inventory_manager.get_inventory(), "inventory.json")
+            print("\nSaving Inventory......")
+            data_manager.save_inventory(inventory_manager.get_inventory(), INVENTORY_FILE)
             print("Inventory saved successfully to inventory.json")
         case("6"):
             #Save Inventory
-            print("\n")
-            print("Saving Inventory before exit.....")
-            data_manager.save_inventory(inventory_manager.get_inventory(), "inventory.json")
+            print("\nSaving Inventory before exit.....")
+            data_manager.save_inventory(inventory_manager.get_inventory(), INVENTORY_FILE)
             print("Inventory saved successfully.")
 
 
