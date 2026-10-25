@@ -16,7 +16,7 @@ class Menu:
         self.__inventory.display_all()
 
     def __add_new_product_opt(self):
-        productID_input = get_valid_input("Product ID: ","string")
+        productID_input = get_valid_input("Product ID: ","string").upper()
         productName_input = get_valid_input("Name: ","string")
         productPrice_input = float(get_valid_input("Price: ","integer"))
         productStock_input = int(get_valid_input("Stock Quantity: ","integer"))
