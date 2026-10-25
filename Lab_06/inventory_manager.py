@@ -57,6 +57,9 @@ class Inventory():
                 return False
 
         self.__product_list.append(target_product)
+        # Sorting
+        self.__product_list.sort(key=lambda p : p.get_id())
+
         return True
 
     def search_product(self, product_id: str):
