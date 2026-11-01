@@ -37,10 +37,11 @@ class Product(ABC):
     @property
     def stock(self):
         return self._stock
+        
     
     def to_dict(self):
         return{
-            "product_type" : self.__class__,
+            "product_type" : self.__class__.__name__,
             "product_id": self._product_id,
             "name": self._name,
             "price": self._price,
@@ -67,7 +68,7 @@ class PhysicalProduct(Product, CanBeShipped):
 
     def calculate_shipping_cost(self):
         print(f"The shipping cost is {self.__weight * COST_PER_KILOGRAM}")
-
+    
     def to_dict(self):
         dict = super().to_dict()
         dict.update({"weight" : self.__weight})
@@ -106,7 +107,7 @@ class Inventory():
     def add_product(self, target_product: Product):
         # Update Stock
         for product in self.__product_list:
-            if target_product.get_id() == product.get_id():
+            if target_product.id == product.id:
                 return False
 
         self.__product_list.append(target_product)
@@ -122,7 +123,7 @@ class Inventory():
 
     def update_inventory_stock(self, product_id : str, new_stock : int):
         for product in self.__product_list:
-            if product.id() == product_id:
+            if product.id == product_id:
                 product.update_stock(new_stock)
 
     def display_all(self):

@@ -16,10 +16,9 @@ class Menu:
         self.__inventory.display_all()
 
     def __add_new_product_opt(self):
-        productType_input = get_valid_input("Product Type: ", "string").upper()
-        print(productType_input == "PHYSICAL")
+        productType_input = get_valid_input("Product Type: ", "string").lower()
         #Exit if user typed an invalid type
-        if(productType_input != "PHYSICAL" and productType_input != "DIGITAL"):
+        if(productType_input != "physical" and productType_input != "digital"):
             print("Product Type does not exist!!")
             return
 
@@ -27,11 +26,11 @@ class Menu:
         productName_input = get_valid_input("Name: ","string")
         productPrice_input = float(get_valid_input("Price: ","number"))
         productStock_input = int(get_valid_input("Stock Quantity: ","number"))
-        if(productType_input == "PHYSICAL"):
+        if(productType_input == "physical"):
             productWeight_input = float(get_valid_input("Weight: ","number"))
             add_status = self.__inventory.add_product(PhysicalProduct(productID_input, productName_input, productPrice_input, productStock_input,productWeight_input))
 
-        elif(productType_input == "DIGITAL"):
+        elif(productType_input == "digital"):
             productDownload_size_input = float(get_valid_input("Download Size: ","number"))
             add_status = self.__inventory.add_product(DigitalProduct(productID_input, productName_input, productPrice_input, productStock_input,productDownload_size_input))
 
@@ -42,7 +41,7 @@ class Menu:
         
     def __update_stock_opt(self):
         print("\nUpdate Stock")
-        productID_input = get_valid_input("Product ID: ","string")
+        productID_input = get_valid_input("Product ID: ","string").upper()
         print("\n")
         product = self.__inventory.search_product(productID_input)
         if(product == None):
@@ -54,6 +53,10 @@ class Menu:
             print(f"Name: {product.name}")
             print(f"Price: {product.price}")
             print(f"Stock: {product.stock}")
+            product.get_fulfilment_info()
+            if(isinstance(product, PhysicalProduct)):
+                product.calculate_shipping_cost()
+
             print("------------------------------------------------")
             print("\n")
             new_stock_input = get_valid_input("New Stock Quantity: ", "integer")
@@ -63,7 +66,7 @@ class Menu:
 
     def __search_prod_opt(self):
         print("\nSearch Product")
-        productID_input = get_valid_input("Enter Product ID: ","string")
+        productID_input = get_valid_input("Enter Product ID: ","string").upper()
         print("\n")
         product = self.__inventory.search_product(productID_input)
         if(product == None):
@@ -75,8 +78,11 @@ class Menu:
             print(f"Name: {product.name}")
             print(f"Price: {product.price}")
             print(f"Stock: {product.stock}")
+            product.get_fulfilment_info()
+            if(isinstance(product, PhysicalProduct)):
+                product.calculate_shipping_cost()
             print("------------------------------------------------")
-            print("\n")
+            print("")
 
     def __save_inventory_opt(self):
             #Save Inventory

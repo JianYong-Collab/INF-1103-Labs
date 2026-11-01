@@ -19,11 +19,16 @@ class FileManager:
             with open(file_path,"r") as file:
                 parsed_data = json.load(file)
                 PRODUCT_MAPPING = {
-                        "PhysicalProduct": PhysicalProduct,
-    "Digital             DigitalProduct": DigitalProduct
+                        PhysicalProduct.__name__ : PhysicalProduct,
+                        DigitalProduct.__name__ :  DigitalProduct
                 }
                 try:
-                    return [PRODUCT_MAPPING[item["product_type"]](**item) for item in parsed_data]
+                    return [
+                        PRODUCT_MAPPING[item["product_type"]](
+                        **{k: v for k,v in item.items() if k != "product_type"}
+                        )
+                        for item in parsed_data
+                        ]
                         
                 except TypeError:
                     return []

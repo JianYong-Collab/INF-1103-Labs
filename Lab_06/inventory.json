@@ -1,0 +1,32 @@
+[
+    {
+        "product_id": "A111",
+        "name": "Sencha",
+        "price": 18.5,
+        "stock": 250
+    },
+    {
+        "product_id": "P001",
+        "name": "Coffee",
+        "price": 26.0,
+        "stock": 27
+    },
+    {
+        "product_id": "P111",
+        "name": "Matcha",
+        "price": 50.0,
+        "stock": 50
+    },
+    {
+        "product_id": "P333",
+        "name": "Hojicha",
+        "price": 12.0,
+        "stock": 200
+    },
+    {
+        "product_id": "P888",
+        "name": "Gyokuro",
+        "price": 100.0,
+        "stock": 40
+    }
+]
