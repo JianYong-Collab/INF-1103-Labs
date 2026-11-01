@@ -1,0 +1,8 @@
+[
+    {
+        "product_id": "P111",
+        "name": "Coffee",
+        "price": 100.0,
+        "stock": 200
+    }
+]

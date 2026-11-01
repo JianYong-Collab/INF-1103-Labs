@@ -1,0 +1,2 @@
+INVENTORY_FILE = "inventory.json"
+COST_PER_KILOGRAM = 2.50
