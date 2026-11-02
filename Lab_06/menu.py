@@ -1,4 +1,5 @@
-from inventory_manager import Inventory, Product
+from inventory_manager import Inventory
+from product import Product
 from file_manager import FileManager
 from utils import get_valid_input
 class Menu:
@@ -47,7 +48,6 @@ class Menu:
             self.__inventory.update_inventory_stock(productID_input, new_stock_input)
             print("\n")
             print("Stock Updated Successfully!")
-
 
     def __search_prod_opt(self):
         print("\nSearch Product")
