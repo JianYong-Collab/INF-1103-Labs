@@ -1,7 +1,8 @@
 import os
 import json
 from dataclasses import dataclass
-from inventory_manager import PhysicalProduct, DigitalProduct
+from digital_product import DigitalProduct
+from physical_product import PhysicalProduct
 
 class FileManager:
     script_dir = os.path.dirname(os.path.abspath(__file__))

@@ -1,4 +1,6 @@
-from inventory_manager import Inventory, PhysicalProduct, DigitalProduct
+from inventory_manager import Inventory
+from digital_product import DigitalProduct
+from physical_product import PhysicalProduct
 from file_manager import FileManager
 from utils import get_valid_input
 class Menu:

@@ -1,4 +1,4 @@
-from inventory_manager import Product, PhysicalProduct, Inventory
+from inventory_manager import Inventory
 from file_manager import FileManager
 from menu import Menu
 from constants import INVENTORY_FILE

@@ -1,7 +1,6 @@
 import os
 import json
-from dataclasses import dataclass
-from inventory_manager import Product
+from product import Product
 
 class FileManager:
     script_dir = os.path.dirname(os.path.abspath(__file__))
