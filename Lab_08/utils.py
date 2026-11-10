@@ -53,5 +53,5 @@ def convert_js_to_products(parsed_data: list):
 
         return products
             
-    except TypeError, KeyError:
+    except (TypeError, KeyError):
         return []
