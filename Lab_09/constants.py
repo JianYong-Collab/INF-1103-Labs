@@ -1,0 +1,2 @@
+INVENTORY_FILE = "products"
+COST_PER_KILOGRAM = 2.50
